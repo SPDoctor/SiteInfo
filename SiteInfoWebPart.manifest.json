@@ -1,0 +1,21 @@
+{
+  "$schema": "../../../node_modules/@microsoft/sp-module-interfaces/lib/manifestSchemas/jsonSchemas/clientSideComponentManifestSchema.json",
+
+  "id": "21c8f19f-d142-41a7-8fce-6067ea2916fb",
+  "componentType": "WebPart",
+  "version": "0.0.1",
+  "manifestVersion": 2,
+
+  "preconfiguredEntries": [{
+    "groupId": "21c8f19f-d142-41a7-8fce-6067ea2916fb",
+    "group": { "default": "Under Development" },
+    "title": { "default": "SiteInfo" },
+    "description": { "default": "Web Part to give information about the current site (SPWeb)" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "SiteInfo for ",
+      "showLists": false,
+      "showUser": true
+    }
+  }]
+}
