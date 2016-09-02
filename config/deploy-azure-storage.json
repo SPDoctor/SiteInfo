@@ -1,0 +1,6 @@
+{
+  "workingDir": "./temp/deploy/",
+  "account": "<!-- STORAGE ACCOUNT NAME -->",
+  "container": "site-info",
+  "accessKey": "<!-- ACCESS KEY -->"
+}

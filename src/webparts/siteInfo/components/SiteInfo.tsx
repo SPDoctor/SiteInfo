@@ -15,7 +15,7 @@ export default class SiteInfo extends React.Component<ISiteInfoProps, {}> {
   }
 
   public componentDidMount(): void {
-    var that: any = this;
+    var that: any = this; // save 'this' so it is available from within the closure
     if (this.props.self.context.environment.type !== EnvironmentType.Local) {
       pnp.sp.web.get().then(result => {
         that.setState({ Title: result.Title });
@@ -61,8 +61,8 @@ export default class SiteInfo extends React.Component<ISiteInfoProps, {}> {
     return (
       <div>
         <h1 className="ms-bgColor-themeLighter">{this.props.description + this.state["Title"]} </h1>
-        <fabric.Button onClick={() => this.setState({ PanelVisible: true }) } className="ms-Button"><i className="ms-Icon ms-Icon--listCheckbox ms-fontSize-xxl" aria-hidden="true"></i> More...</fabric.Button>
-        <fabric.Panel isOpen={this.state["PanelVisible"]}>
+        <fabric.Button onClick={() => this.setState({ PanelVisible: true })} className="ms-Button"><i className="ms-Icon ms-Icon--listCheckbox ms-fontSize-xxl" aria-hidden="true"></i> More...</fabric.Button>
+        <fabric.Panel isOpen={this.state["PanelVisible"]} onDismiss={() => this.setState({ PanelVisible: false }) }>
           <h2>More information for {this.props.self.context.pageContext.web.title}</h2>
           <ul>
             <li>serverRelativeUrl = {this.props.self.context.pageContext.web.serverRelativeUrl}</li>
