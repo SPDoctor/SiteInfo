@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as fabric from 'office-ui-fabric-react'; // should just import needed modules for production use
 import * as pnp from 'sp-pnp-js';
+import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import { ISiteInfoWebPartProps } from '../ISiteInfoWebPartProps';
-import { EnvironmentType } from '@microsoft/sp-client-base';
 
 export interface ISiteInfoProps extends ISiteInfoWebPartProps {
 }
@@ -16,11 +16,13 @@ export default class SiteInfo extends React.Component<ISiteInfoProps, {}> {
 
   public componentDidMount(): void {
     var that: any = this; // save 'this' so it is available from within the closure
-    if (this.props.self.context.environment.type !== EnvironmentType.Local) {
-      pnp.sp.web.get().then(result => {
+    if (!(Environment.type === EnvironmentType.Local)) {
+      // make sure we are on the correct web...
+      var web = new pnp.Web(this.props.self.context.pageContext.web.absoluteUrl);
+      web.get().then(result => {
         that.setState({ Title: result.Title });
       });
-      pnp.sp.web.lists.get().then(result => {
+      web.lists.get().then(result => {
         var lists: any = result.map(r => r.Title);
         that.setState({ Lists: lists });
       });
@@ -28,7 +30,7 @@ export default class SiteInfo extends React.Component<ISiteInfoProps, {}> {
     else { // running locally - use test data
       that.setState({
         Title: "My Site Title",
-        Lists: ["Documents", "My List 1", "My List 2"]
+        Lists: ["Documents", "My List 1", "My List 2"],
       });
     }
   }
@@ -74,7 +76,7 @@ export default class SiteInfo extends React.Component<ISiteInfoProps, {}> {
         {this.state["SpinnerVisible"] ? <fabric.Spinner type={this.state["SpinnerType"]} /> : <span/> }
         <hr />
         <fabric.Button onClick={() => this.despinner_click() } className={this.state["ButtonClass"]}>Dismiss Gratuitous Spinner</fabric.Button>
-        {this.props.self.context.environment.type === EnvironmentType.Local ? <h3 className="ms-bgColor-error">Running locally with mock data</h3> : <span/> }
+        {Environment.type === EnvironmentType.Local ? <h3 className="ms-bgColor-error">Running locally with mock data</h3> : <span/> }
       </div>
     );
   }

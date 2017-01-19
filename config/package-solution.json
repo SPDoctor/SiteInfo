@@ -1,10 +1,10 @@
 {
   "solution": {
     "name": "site-info-client-side-solution",
-    "id": "3a7ca660-bb58-4a1f-b3b0-5f8d6a72c0d6",
+    "id": "434119a2-7676-4890-8563-ec487edf0b16",
     "version": "1.0.0.0"
   },
   "paths": {
-    "zippedPackage": "site-info.spapp"
+    "zippedPackage": "solution/site-info.sppkg"
   }
 }
