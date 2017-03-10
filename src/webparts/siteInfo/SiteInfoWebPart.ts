@@ -1,3 +1,4 @@
+import { Version } from '@microsoft/sp-core-library';
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import {
@@ -5,23 +6,32 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   PropertyPaneCheckbox
+
 } from '@microsoft/sp-webpart-base';
-import SiteInfo, { ISiteInfoProps } from './components/SiteInfo';
+
+import SiteInfo, {ISiteInfoProps }  from './components/SiteInfo';
+//import { IHelloWorldWebPartProps } from './ISiteInfoWebPartProps';
 import { ISiteInfoWebPartProps } from './ISiteInfoWebPartProps';
 
 export default class SiteInfoWebPart extends BaseClientSideWebPart<ISiteInfoWebPartProps> {
 
+
   public render(): void {
-    const element: React.ReactElement<ISiteInfoProps> = React.createElement(SiteInfo, {
+    const element: React.ReactElement<ISiteInfoWebPartProps> = React.createElement(SiteInfo, {
       description: this.properties.description,
       showLists: this.properties.showLists,
       showUser: this.properties.showUser,
       self: this
     });
+
     ReactDom.render(element, this.domElement);
   }
 
-  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    protected get dataVersion(): Version {
+    return Version.parse('1.0');
+  }
+
+protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       pages: [
         {
