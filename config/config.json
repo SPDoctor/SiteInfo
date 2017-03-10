@@ -8,6 +8,5 @@
   ],
   "externals": {},
   "localizedResources": {
-    "siteInfoStrings": "webparts/siteInfo/loc/{locale}.js"
   }
 }
